@@ -1,0 +1,14 @@
+<h1>
+  {{title}}{{date}}
+</h1>
+<div>
+  <input type="date" [value]="testdate" (change)="dateChange($event)">
+</div>
+<div>
+  <div *ngFor="let item of items;let i = index">
+    <span>
+      <a [href]="item.href">{{item.name}}</a>
+    </span>
+    <hr *ngIf="(i+1)%5===0">
+  </div>
+</div>
