@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   }
     
   ngOnInit(){
-    this.http.get(`http://localhost:3000/api/daily?date=${this.date}`).then(
+    this.http.get(`http://139.196.87.132:8099/api/daily?date=${this.date}`).then(
       success => {
         this.items = success.items;
         debugger;
