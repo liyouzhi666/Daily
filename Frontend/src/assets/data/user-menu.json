@@ -1,0 +1,40 @@
+[
+    {
+        "name": "日报管理",
+        "icon": "fa-database",
+        "children": [
+            {
+                "name": "我的日报",
+                "link": "data-table"
+            },
+            {
+                "name": "我的收藏",
+                "link": "data-collection"
+            }
+        ]
+    },
+    {
+        "name": "日报定制",
+        "icon": "fa-arrows",
+        "children": [
+            {
+                "name": "日报模版",
+                "link": "***"
+            }
+        ]
+    },
+    {
+        "name": "爬虫管理",
+        "icon": "fa-bug",
+        "children": [
+            {
+                "name": "上传爬虫",
+                "link": "***"
+            },
+            {
+                "name": "在线制作",
+                "link": "***"
+            }
+        ]
+    }
+]
