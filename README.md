@@ -31,6 +31,7 @@
 4. 在 Frontend 下执行: npm install  
    在 Backend／backendServer 下执行: npm install
 
+5. 在 Frontend 下执行: ng serve ,如若操作无误浏览器打开 http://localhost:4200 ,将会显示部署的前端页面
 ## 效果图
 
 ## 关于
