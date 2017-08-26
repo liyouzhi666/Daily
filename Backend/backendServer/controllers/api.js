@@ -88,7 +88,7 @@ module.exports = {
         ctx.response.set('Access-Control-Allow-Origin','*');
         if (p.userName === 'spg' && p.password === 'spg') {
             ctx.response.status = 200;
-            ctx.response.set('Set-Cookie', 'spg=loginSuccess;path=/');            
+            ctx.response.set('Set-Cookie', 'SPGTEST=LoginSuccess; Path=/; Max-Age=7200');            
             ctx.response.body = {
                 message: 'login success'
             };
