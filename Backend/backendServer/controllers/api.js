@@ -80,8 +80,10 @@ module.exports = {
             password: ctx.request.body.password
         };
         ctx.response.type = 'application/json';
+        ctx.response.set('Access-Control-Allow-Origin','*');
         if (p.userName === 'spg' && p.password === 'spg') {
             ctx.response.status = 200;
+            ctx.response.set('Set-Cookie', 'spg=loginSuccess;path=/');            
             ctx.response.body = {
                 message: 'login success'
             };
