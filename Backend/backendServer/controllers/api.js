@@ -72,5 +72,25 @@ module.exports = {
         products.push(p);
         ctx.response.type = 'application/json';
         ctx.response.body = p;
+    },
+
+    'POST /api/spgtest': async (ctx, next) => {
+        var p = {
+            userName: ctx.request.body.userName,
+            password: ctx.request.body.password
+        };
+        ctx.response.type = 'application/json';
+        if (p.userName === 'spg' && p.password === 'spg') {
+            ctx.response.status = 200;
+            ctx.response.body = {
+                message: 'login success'
+            };
+        } else {
+            ctx.response.status = 401;
+            ctx.response.body = {
+                code: 'auth:user_not_found',
+                message: 'user not found or wrong password'
+            };
+        }
     }
 };
