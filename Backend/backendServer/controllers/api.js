@@ -76,10 +76,15 @@ module.exports = {
 
     'POST /api/spgtest': async (ctx, next) => {
         var p = {
-            userName: ctx.request.body.userName,
-            password: ctx.request.body.password
+            userName: '',
+            password: ''
         };
         ctx.response.type = 'application/json';
+        for(var i in ctx.request.body){
+            console.log(i);
+            p.userName = JSON.parse(i).userName;
+            p.password = JSON.parse(i).password;
+        }
         ctx.response.set('Access-Control-Allow-Origin','*');
         if (p.userName === 'spg' && p.password === 'spg') {
             ctx.response.status = 200;
