@@ -12,7 +12,7 @@ import {HttpModule, JsonpModule} from '@angular/http';
 import {SharedModule, AccordionModule, GrowlModule, TooltipModule} from 'primeng/primeng';
 import {PageNotFoundComponent} from '../not-found.component';
 import {MyGoTopModule} from '../components/my-gotop/my-gotop';
-
+import {DialogModule, ButtonModule, InputTextModule} from 'primeng/primeng';
 
 
 @NgModule({
@@ -29,6 +29,10 @@ import {MyGoTopModule} from '../components/my-gotop/my-gotop';
     GrowlModule,         //  peimrNG msg提示
     TooltipModule,       //  Tooltip 提示
     MyGoTopModule,       //回到顶部组件
+    
+    DialogModule,
+    ButtonModule,
+    InputTextModule
   ],
   exports: [],
   declarations: [

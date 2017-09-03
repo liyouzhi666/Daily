@@ -15,6 +15,11 @@ export const workspaceRoutes = [
         data: {preload: true}
       },
       {
+        path: 'editor',
+        loadChildren: '../editor/editor.module#EditorModule',
+        data: {preload: true}
+      },
+      {
         path: '**',
         component: PageNotFoundComponent
       },

@@ -22,12 +22,13 @@ export class DataTableComponent implements OnInit {
     title = '码农日报-';
     items: any;
     testdate: any;
-    isEmpty: boolean = true;
+    isEmpty = '';
 
     ngOnInit() {
         var date = new Date();
+        date = new Date(date.getTime()-1000*60*60*24);
         var month = date.getMonth() >= 9 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1);
-        var day = (date.getDate() - 1) > 9 ? date.getDate() - 1 : '0' + (date.getDate() - 1);
+        var day = date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
         this.date = `${date.getFullYear()}${month}${day}`;
         this.getData();
     }
@@ -36,14 +37,14 @@ export class DataTableComponent implements OnInit {
         this.http.get(`http://139.196.87.132:8099/api/daily?date=${this.date}`).then(
             success => {
                 this.items = success.items;
-                this.isEmpty = false;
+                this.isEmpty = 'success';
                 debugger;
                 NProgress.done();
             }
         ).catch(
             err => {
                 // alert(err);
-                this.isEmpty = true;
+                this.isEmpty = 'empty';
                 this.items = [];
                 NProgress.done();
             }
@@ -56,5 +57,14 @@ export class DataTableComponent implements OnInit {
         var day = this.selectTime.getDate() > 9 ? this.selectTime.getDate() : '0' + this.selectTime.getDate();
         this.date = `${this.selectTime.getFullYear()}${month}${day}`;
         this.getData();
+    }
+
+    count() {
+        if (sessionStorage.getItem('userToken')) {
+            
+        } else {
+            this.msgs = [];
+            this.msgs.push({severity:'warn', summary:'未登录', detail:'收藏功能在账号登陆后才可使用！'});    
+        }
     }
 }

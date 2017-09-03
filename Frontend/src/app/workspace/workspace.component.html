@@ -4,12 +4,12 @@
 <div class="header">
   <ul>
       <li class="header-li">
-          <a>DIY自己的日报</a>
+          <a style="font-size:18px;width:150px;">DIY自己的日报</a>
       </li>
   </ul>
   <ul style="float: right">
     <li class="header-li">
-      <a style="width: 150px;overflow: hidden;">{{realname}}</a>
+      <a style="width: 150px;overflow: hidden;" (click)="showLoginWindow()">{{realname}}</a>
     </li>
     <li class="header-li" style="width: 150px" >
       <a class="fa fa-sign-out" (click)="loginOut()"></a>
@@ -45,3 +45,26 @@
 <div class="router" [@routerState]="state">
   <router-outlet></router-outlet>
 </div>
+
+<p-dialog header="用户登陆" [(visible)]="display" modal="modal" width="500" [responsive]="true">
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-11">
+        <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon" style="min-width: 2.5em;padding: .5em;"><i class="fa fa-user"></i></span>
+            <input type="text" pInputText placeholder="请输入用户名">         
+        </div>
+    </div>
+  </div>
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-11">
+        <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon" style="min-width: 2.5em;padding: .5em;"><i class="fa fa-unlock-alt"></i></span>
+            <input type="text" pInputText placeholder="请输入密码">         
+        </div>
+    </div>
+  </div>
+  <p-footer>
+    <button type="button" pButton icon="fa-check" (click)="display=false" label="登陆"></button>
+    <button type="button" pButton icon="fa-close" (click)="display=false" label="取消"></button>
+  </p-footer>
+</p-dialog>

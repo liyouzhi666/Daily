@@ -1,4 +1,4 @@
-<p-growl [(value)]="msgs" life="1000"></p-growl>
+<p-growl [(value)]="msgs" life="2000"></p-growl>
 <div [@pageAnimation]="'in'">
   <my-breadcrumb name1="日报管理" name2="我的日报"></my-breadcrumb>
 
@@ -12,15 +12,18 @@
 <h1>
   {{title}}{{date}}
 </h1>
-<div *ngIf="!isEmpty">
-  <div *ngFor="let item of items;let i = index">
+<div *ngIf="isEmpty === 'success'">
+  <hr style="height:5px;border:none;border-top:5px groove skyblue;" />
+  <div *ngFor="let item of items;let i = index" style="margin-bottom:5px;min-height:28px;">
     <span>
-      <a [href]="item.href" target="_blank">{{i+1}}. {{item.name}}</a>
+      <a class="dailyItem" [href]="item.href" target="_blank">{{i+1}}. {{item.name}}</a>
     </span>
-    <hr *ngIf="(i+1)%5===0">
+    <button pButton type="button" (click)="count()" label="收藏" style="float:right;"></button>
+    <hr *ngIf="(i+1)%5===0" style="margin-top:20px;">
   </div>
 </div>
-<div *ngIf="isEmpty">
+
+<div *ngIf="isEmpty === 'empty'">
     <br>
     <h2>说出来你可能不信</h2>
     <h2>{{date}}的日报自己跑掉了</h2>

@@ -64,7 +64,8 @@ export class WorkspaceComponent implements OnInit {
   // beforeUrl: string = beforeUrl;                   //api前缀地址
   timeout: any;                                    //错误信息时间
   realname:string = '未登录';                                 //头部账号名字
-  menumsg:string
+  menumsg:string;
+  display = false;
   /************************* 获取菜单 ********************************/
   getMenu() {
     if (sessionStorage.getItem('menu111')) {
@@ -102,6 +103,10 @@ export class WorkspaceComponent implements OnInit {
       }
       this.pTooltipIf = false;
     }
+  }
+
+  showLoginWindow() {
+    this.display = true;
   }
   /************************* 退出登录 ********************************/
   loginOut() {

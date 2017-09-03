@@ -9,7 +9,8 @@
         "outDir": "dist",
         "assets": [
           "assets",
-          "favicon.ico"
+          "favicon.ico",
+          { "glob": "**/*", "input": "../node_modules/ngx-monaco-editor/assets/monaco", "output": "./assets/monaco/" }
         ],
         "index": "index.html",
         "main": "main.ts",
@@ -27,7 +28,9 @@
             "theme-element.css",
             "styles.css"
         ],
-        "scripts": ["../node_modules/chart.js/dist/Chart.js"],
+        "scripts": [
+          "../node_modules/chart.js/dist/Chart.js"
+        ],
         "environmentSource": "environments/environment.ts",
         "environments": {
           "dev": "environments/environment.ts",
