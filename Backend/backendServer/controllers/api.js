@@ -47,7 +47,17 @@ module.exports = {
             timestamps: false
         });
 
-        var items = await Daily.findAll();
+        try {
+            var items = await Daily.findAll();
+        } catch (err) {
+            ctx.response.set('Access-Control-Allow-Origin','*');
+            ctx.response.type = 'application/json';
+            ctx.response.body = {
+                items: [],
+                error: err.message
+            };
+            return;
+        }
         console.log(`find ${items.length} items:`);
         for (let item of items) {
             var name = new Buffer(item.name, 'base64').toString();
@@ -60,31 +70,63 @@ module.exports = {
         ctx.response.set('Access-Control-Allow-Origin','*');
         ctx.response.type = 'application/json';
         ctx.response.body = {
-            items: myItems
+            items: myItems,
+            error: ''
         };
     },
 
-    'POST /api/products': async (ctx, next) => {
+    'POST /api/login': async (ctx, next) => {
         var p = {
-            name: ctx.request.body.name,
-            price: ctx.request.body.price
+            name: ctx.request.body.userName,
+            pw: ctx.request.body.password
         };
-        products.push(p);
+        var User = sequelize.define('userInfo', {
+            userName: Sequelize.STRING(255),
+            password: Sequelize.STRING(255)
+        },{
+            tableName: 'User',
+            timestamps: false
+        });
+
+        var myClient = await User.findAll({
+            where: {
+                userName: p.name
+            }
+        });
+        ctx.response.set('Access-Control-Allow-Origin','*');
         ctx.response.type = 'application/json';
-        ctx.response.body = p;
+        if(myClient.length==0){
+            ctx.response.body = {
+                info: 'login failed!',
+                error: '您输入的账号不存在！'
+            };
+        } else {
+            if(myClient[0].password == p.pw) {
+                ctx.response.body = {
+                    info: 'login successed!',
+                    error: ''
+                };
+            } else {
+                ctx.response.body = {
+                    info: 'login failed!',
+                    error: '您输入的密码有误！'
+                };
+            }
+        }
+
     },
 
     'POST /api/spgtest': async (ctx, next) => {
         var p = {
-            userName: '',
-            password: ''
+            userName: ctx.request.body.userName,
+            password: ctx.request.body.password
         };
         ctx.response.type = 'application/json';
-        for(var i in ctx.request.body){
-            console.log(i);
-            p.userName = JSON.parse(i).userName;
-            p.password = JSON.parse(i).password;
-        }
+        // for(var i in ctx.request.body){
+        //     console.log(i);
+        //     p.userName = JSON.parse(i).userName;
+        //     p.password = JSON.parse(i).password;
+        // }
         ctx.response.set('Access-Control-Allow-Origin','*');
         if (p.userName === 'spg' && p.password === 'spg') {
             ctx.response.status = 200;

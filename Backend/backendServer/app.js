@@ -13,8 +13,14 @@ app.use(async (ctx, next) => {
 });
 
 // parse request body:
-app.use(bodyParser());
-
+app.use(bodyParser(
+    {
+        extendTypes: {
+            json: ['application/x-www-form-urlencoded']
+        }
+    }
+));
+  
 // add controller:
 app.use(controller());
 

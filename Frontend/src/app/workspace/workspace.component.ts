@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ActivatedRouteSnapshot, RouterState, RouterStateSnapshot } from '@angular/router';
 // import {Car, Message} from '../common/car';
 // import {beforeUrl} from '../common/public-data';
-import {trigger, state, style, animate, transition} from '@angular/animations';
-import {WorkspaceService} from './workspace.service';
+import { trigger, state, style, animate, transition } from '@angular/animations';
+import { WorkspaceService } from './workspace.service';
+import { HttpService } from '../common/http.service';
 
 @Component({
   selector: 'app-workspace',
@@ -44,7 +45,7 @@ import {WorkspaceService} from './workspace.service';
 })
 export class WorkspaceComponent implements OnInit {
 
-  constructor(private myService: WorkspaceService,public router: Router) {
+  constructor(private myService: WorkspaceService, public router: Router, private http: HttpService) {
   };
 
   ngOnInit() {
@@ -58,14 +59,16 @@ export class WorkspaceComponent implements OnInit {
   /*************************  ********************************/
   informationNumber: any = 18;                      //头部我的消息数量
   menus: any[];                                    //菜单
-  msgs= [];                            //消息
+  msgs = [];                            //消息
   state: string = 'inactive';                      //菜单状态
   pTooltipIf: boolean = false;                     //pTooltipIf状态
   // beforeUrl: string = beforeUrl;                   //api前缀地址
   timeout: any;                                    //错误信息时间
-  realname:string = '未登录';                                 //头部账号名字
-  menumsg:string;
+  realname: string = '未登录';                                 //头部账号名字
+  menumsg: string;
   display = false;
+  userName: string;
+  password: string;
   /************************* 获取菜单 ********************************/
   getMenu() {
     if (sessionStorage.getItem('menu111')) {
@@ -74,10 +77,10 @@ export class WorkspaceComponent implements OnInit {
     } else {
       this.myService.getMenu()
         .then(
-          menus => this.menus = menus,
-          error => {
-            this.menumsg = '获取菜单失败,请刷新再试'
-          }
+        menus => this.menus = menus,
+        error => {
+          this.menumsg = '获取菜单失败,请刷新再试'
+        }
         )
         .then(() => {
           if (this.menus) {
@@ -107,6 +110,33 @@ export class WorkspaceComponent implements OnInit {
 
   showLoginWindow() {
     this.display = true;
+  }
+
+  login() {
+    let postBody = {
+      userName: this.userName,
+      password: this.password
+    }
+    let url = this.http.getServerIP();
+    debugger;
+    this.http.post(`${url}/api/login`,JSON.stringify(postBody)).then(
+      success => {
+        this.msgs = [];
+        if(success.info === 'login successed!') {
+          this.msgs.push({severity:'success', summary:'登陆成功', detail:`${this.userName}登陆成功！`});
+          this.realname = this.userName;
+          sessionStorage.setItem('userToken', window.btoa(`${this.userName}:${this.password}`));
+          sessionStorage.setItem('realname', this.userName);
+        } else{
+          this.msgs.push({severity:'warn', summary:'登陆失败', detail:`${success.error}`});
+        }
+        this.display = false;
+      }
+    ).catch(
+      error => {
+        debugger;
+      }
+    )
   }
   /************************* 退出登录 ********************************/
   loginOut() {

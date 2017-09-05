@@ -34,10 +34,16 @@ export class DataTableComponent implements OnInit {
     }
 
     getData() {
-        this.http.get(`http://139.196.87.132:8099/api/daily?date=${this.date}`).then(
+        let url = this.http.getServerIP();
+        this.http.get(`${url}/api/daily?date=${this.date}`).then(
             success => {
-                this.items = success.items;
-                this.isEmpty = 'success';
+                if(success.error === ''){
+                    this.items = success.items;
+                    this.isEmpty = 'success';
+                } else {
+                    this.isEmpty = 'empty';
+                    this.items = [];
+                }
                 debugger;
                 NProgress.done();
             }

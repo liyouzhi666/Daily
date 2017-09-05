@@ -28,6 +28,11 @@ export class HttpService {
     this.http = http;
    }
 
+   getServerIP() {
+       return `http://139.196.87.132:8099`;
+    //    return `http://localhost:3000`;
+   }
+
    get(url: string): Promise<any> {
         let options = new RequestOptions({ withCredentials:false });
         return this.http.get(url,options)
@@ -38,13 +43,13 @@ export class HttpService {
     }
 
     post(url: string, jsonBody: any): Promise<any> {
-        //let headers = new Headers({'Content-Type': 'application/json'});
+        // let headers = new Headers({'Content-Type': 'application/json'});
         let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
 
         let options = new RequestOptions({ headers: headers,withCredentials:false });
         return this.http.post(url, jsonBody, options)
                         .toPromise()
-                        .then(response => response.text())
+                        .then(response => response.json())
                         .catch(this.handleError);
     }
 

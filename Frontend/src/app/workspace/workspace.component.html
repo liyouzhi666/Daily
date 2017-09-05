@@ -46,12 +46,12 @@
   <router-outlet></router-outlet>
 </div>
 
-<p-dialog header="用户登陆" [(visible)]="display" modal="modal" width="500" [responsive]="true">
+<p-dialog header="用户登陆" [(visible)]="display" modal="modal" width="500" [responsive]="true" [positionTop]="'150'">
   <div class="ui-g ui-fluid">
     <div class="ui-g-12 ui-md-11">
         <div class="ui-inputgroup">
             <span class="ui-inputgroup-addon" style="min-width: 2.5em;padding: .5em;"><i class="fa fa-user"></i></span>
-            <input type="text" pInputText placeholder="请输入用户名">         
+            <input type="text" pInputText [(ngModel)]="userName" placeholder="请输入用户名">         
         </div>
     </div>
   </div>
@@ -59,12 +59,12 @@
     <div class="ui-g-12 ui-md-11">
         <div class="ui-inputgroup">
             <span class="ui-inputgroup-addon" style="min-width: 2.5em;padding: .5em;"><i class="fa fa-unlock-alt"></i></span>
-            <input type="text" pInputText placeholder="请输入密码">         
+            <input type="password" pInputText [(ngModel)]="password" placeholder="请输入密码">         
         </div>
     </div>
   </div>
   <p-footer>
-    <button type="button" pButton icon="fa-check" (click)="display=false" label="登陆"></button>
+    <button type="button" pButton icon="fa-check" (click)="login()" label="登陆"></button>
     <button type="button" pButton icon="fa-close" (click)="display=false" label="取消"></button>
   </p-footer>
 </p-dialog>
