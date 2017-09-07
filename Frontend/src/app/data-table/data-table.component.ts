@@ -23,6 +23,9 @@ export class DataTableComponent implements OnInit {
     items: any;
     testdate: any;
     isEmpty = '';
+    display = false;
+    selectedItemName: any;
+    selectedItemHref: any;
 
     ngOnInit() {
         var date = new Date();
@@ -57,6 +60,10 @@ export class DataTableComponent implements OnInit {
         )
     }
 
+    showLoginWindow() {
+        this.display = true;
+    }
+
     selectDate() {
         debugger;
         var month = this.selectTime.getMonth() >= 9 ? this.selectTime.getMonth() + 1 : '0' + (this.selectTime.getMonth() + 1);
@@ -65,12 +72,16 @@ export class DataTableComponent implements OnInit {
         this.getData();
     }
 
-    count() {
+    collect(index: any) {
         if (sessionStorage.getItem('userToken')) {
-            
+            this.selectedItemName = this.items[index].name;
+            this.selectedItemHref = this.items[index].href;
+            this.showLoginWindow();
         } else {
             this.msgs = [];
             this.msgs.push({severity:'warn', summary:'未登录', detail:'收藏功能在账号登陆后才可使用！'});    
         }
     }
+
+    postCollect(){}
 }

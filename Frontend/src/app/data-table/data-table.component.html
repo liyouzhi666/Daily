@@ -5,8 +5,8 @@
   <div class="search-area">
     <label class="mr15">选择日期</label>
 
-    <p-calendar [showIcon]="true" [inputStyle]="{'width':'100px'}"
-                [style]="{'margin-right':'35px'}" [(ngModel)]="selectTime" (onSelect)="selectDate()"></p-calendar>
+    <p-calendar [showIcon]="true" [inputStyle]="{'width':'100px'}" [style]="{'margin-right':'35px'}" [(ngModel)]="selectTime"
+      (onSelect)="selectDate()"></p-calendar>
   </div>
 </div>
 <h1>
@@ -18,14 +18,53 @@
     <span>
       <a class="dailyItem" [href]="item.href" target="_blank">{{i+1}}. {{item.name}}</a>
     </span>
-    <button pButton type="button" (click)="count()" label="收藏" style="float:right;"></button>
+    <button pButton type="button" (click)="collect(i)" label="+ 收藏" style="float:right;"></button>
     <hr *ngIf="(i+1)%5===0" style="margin-top:20px;">
   </div>
 </div>
 
 <div *ngIf="isEmpty === 'empty'">
-    <br>
-    <h2>说出来你可能不信</h2>
-    <h2>{{date}}的日报自己跑掉了</h2>
-    <img src="assets/image/baozou.png">
+  <br>
+  <h2>说出来你可能不信</h2>
+  <h2>{{date}}的日报自己跑掉了</h2>
+  <img src="assets/image/baozou.png">
 </div>
+
+<p-dialog header="收藏文章" [(visible)]="display" modal="modal" width="600" [responsive]="true" [positionTop]="'150'">
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-12">
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon" style="padding-top:7px;">文章名称</span>
+        <input type="text" pInputText [(ngModel)]="selectedItemName" placeholder="请输入名称">
+      </div>
+    </div>
+  </div>
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-12">
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon" style="padding-top:7px;">文章地址</span>
+        <input type="text" pInputText [(ngModel)]="selectedItemHref" placeholder="请输入名称">
+      </div>
+    </div>
+  </div>
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-12">
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon" style="padding-top:7px;">文章分类</span>
+        <input type="text" pInputText placeholder="请输入分类">
+      </div>
+    </div>
+  </div>
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-12">
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon" style="padding-top:7px;">文章标签</span>
+        <input type="text" pInputText placeholder="请输入标签">
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <button type="button" pButton icon="fa-check" (click)="postCollect()" label="收藏"></button>
+    <button type="button" pButton icon="fa-close" (click)="display=false" label="取消"></button>
+  </p-footer>
+</p-dialog>

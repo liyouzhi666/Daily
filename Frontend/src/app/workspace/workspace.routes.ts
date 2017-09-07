@@ -20,6 +20,11 @@ export const workspaceRoutes = [
         data: {preload: true}
       },
       {
+        path: 'collection',
+        loadChildren: '../collection/collection.module#CollectionModule',
+        data: {preload: true}
+      },
+      {
         path: '**',
         component: PageNotFoundComponent
       },

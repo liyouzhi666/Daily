@@ -1,0 +1,13 @@
+<p-growl [(value)]="msgs" life="2000"></p-growl>
+<div [@pageAnimation]="'in'">
+  <my-breadcrumb name1="日报管理" name2="我的收藏"></my-breadcrumb>
+</div>
+
+<p-dataTable [value]="cars" selectionMode="single" [(selection)]="selectedCar" (onRowSelect)="onRowSelect($event)" [paginator]="true" rows="15" [responsive]="true">
+    <p-header>我的收藏</p-header>
+    <p-column field="vin" header="Vin" [sortable]="true"></p-column>
+    <p-column field="year" header="Year" [sortable]="true"></p-column>
+    <p-column field="brand" header="Brand" [sortable]="true"></p-column>
+    <p-column field="color" header="Color" [sortable]="true"></p-column>
+    <p-footer><div class="ui-helper-clearfix" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Add"></button></div></p-footer>
+</p-dataTable>
