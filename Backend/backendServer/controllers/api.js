@@ -113,7 +113,103 @@ module.exports = {
                 };
             }
         }
+    },
 
+    'POST /api/collect': async (ctx, next) => {
+        var Collection = sequelize.define('collection', {
+            name: Sequelize.TEXT,
+            href: Sequelize.TEXT,
+            class: Sequelize.STRING(255),
+            tags: Sequelize.TEXT,
+            updatedAt: Sequelize.STRING(30),
+            user: Sequelize.STRING(50)
+        },{
+            tableName: 'Collection',
+            timestamps: false
+        });
+        var now = String(Date.now());
+        try {
+            var myCollection = await Collection.create({
+                name: new Buffer(ctx.request.body.name).toString('base64'),
+                href: new Buffer(ctx.request.body.href).toString('base64'),
+                class: ctx.request.body.class,
+                tags: ctx.request.body.tags,
+                updatedAt: now,
+                user: ctx.request.body.user
+            });
+        } catch (err) {
+            ctx.response.set('Access-Control-Allow-Origin','*');
+            ctx.response.type = 'application/json';
+            ctx.response.body = {
+                info: 'collect failed!',
+                error: err
+            };
+            return;
+        }
+        ctx.response.set('Access-Control-Allow-Origin','*');
+        ctx.response.type = 'application/json';
+        ctx.response.body = {
+            info: 'collect successed!',
+            error: ''
+        };
+    },
+
+    'GET /api/collect': async (ctx, next) => {
+        const querystring = require('querystring');
+        if (ctx.request.querystring) {
+            var myUser = querystring.parse(ctx.request.querystring).user;
+        }
+        var myItems = [];
+        var Collection = sequelize.define('cl', {
+            id: {
+                type: Sequelize.INTEGER,
+                primaryKey: true
+            },
+            name: Sequelize.TEXT,
+            href: Sequelize.TEXT,
+            class: Sequelize.STRING(255),
+            tags: Sequelize.TEXT,
+            updatedAt: Sequelize.STRING(30)
+        },{
+            tableName: 'Collection',
+            timestamps: false
+        });
+
+        try {
+            var items = await Collection.findAll({
+                where: {
+                    user: myUser
+                }
+            });
+        } catch (err) {
+            ctx.response.set('Access-Control-Allow-Origin','*');
+            ctx.response.type = 'application/json';
+            ctx.response.body = {
+                items: [],
+                error: err.message
+            };
+            return;
+        }
+        console.log(`find ${items.length} items:`);
+        for (let item of items) {
+            var name = new Buffer(item.name, 'base64').toString();
+            var href = new Buffer(item.href, 'base64').toString();
+            let obj = {
+                'id': item.id,
+                'name': name,
+                'href': href,
+                'class': item.class,
+                'tags': item.tags,
+                'updatedAt': item.updatedAt
+            };
+            myItems.push(obj);
+        }         
+        ctx.response.set('Access-Control-Allow-Origin','*');
+        ctx.response.type = 'application/json';
+        ctx.response.body = {
+            items: myItems,
+            error: ''
+        };
     },
 
     'POST /api/spgtest': async (ctx, next) => {
