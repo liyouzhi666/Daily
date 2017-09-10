@@ -134,7 +134,7 @@ export class WorkspaceComponent implements OnInit {
       }
     ).catch(
       error => {
-        debugger;
+        this.msgs.push({severity:'error', summary:'error Message', detail:`${error}`});
       }
     )
   }
@@ -143,6 +143,6 @@ export class WorkspaceComponent implements OnInit {
     sessionStorage.removeItem('userToken');
     sessionStorage.removeItem('menu111');
     sessionStorage.removeItem('realname');
-    this.router.navigateByUrl("login");
+    this.realname = '未登录';  
   }
 }

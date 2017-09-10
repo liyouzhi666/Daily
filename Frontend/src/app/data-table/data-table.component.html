@@ -51,7 +51,7 @@
     <div class="ui-g-12 ui-md-12">
       <div class="ui-inputgroup">
         <span class="ui-inputgroup-addon" style="padding-top:7px;">文章分类</span>
-        <input type="text" pInputText placeholder="请输入分类">
+        <input type="text" pInputText [(ngModel)]="selectedItemClass" placeholder="请输入分类">
       </div>
     </div>
   </div>
@@ -59,7 +59,7 @@
     <div class="ui-g-12 ui-md-12">
       <div class="ui-inputgroup">
         <span class="ui-inputgroup-addon" style="padding-top:7px;">文章标签</span>
-        <input type="text" pInputText placeholder="请输入标签">
+        <input type="text" pInputText [(ngModel)]="selectedItemTags" placeholder="请输入标签">
       </div>
     </div>
   </div>

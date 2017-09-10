@@ -26,6 +26,8 @@ export class DataTableComponent implements OnInit {
     display = false;
     selectedItemName: any;
     selectedItemHref: any;
+    selectedItemClass: any;
+    selectedItemTags: any;
 
     ngOnInit() {
         var date = new Date();
@@ -76,6 +78,8 @@ export class DataTableComponent implements OnInit {
         if (sessionStorage.getItem('userToken')) {
             this.selectedItemName = this.items[index].name;
             this.selectedItemHref = this.items[index].href;
+            this.selectedItemClass = "";
+            this.selectedItemTags = "";
             this.showLoginWindow();
         } else {
             this.msgs = [];
@@ -83,5 +87,31 @@ export class DataTableComponent implements OnInit {
         }
     }
 
-    postCollect(){}
+    postCollect() {
+        let postBody = {
+            name: this.selectedItemName,
+            href: this.selectedItemHref,
+            class: this.selectedItemClass,
+            tags: this.selectedItemTags,
+            user: sessionStorage.getItem('realname')
+        }
+        let url = this.http.getServerIP();
+        debugger;
+        this.http.post(`${url}/api/collect`, JSON.stringify(postBody)).then(
+            success => {
+                this.msgs = [];
+                if (success.info === 'collect successed!') {
+                    this.msgs.push({ severity: 'success', summary: '收藏成功', detail: `收藏成功！` });
+                } else {
+                    this.msgs.push({ severity: 'warn', summary: '收藏失败', detail: `${success.error}` });
+                }
+                this.display = false;
+            }
+        ).catch(
+            error => {
+                this.msgs.push({ severity: 'error', summary: 'error Message', detail: `${error}` });
+                this.display = false;
+            }
+        )
+    }
 }
