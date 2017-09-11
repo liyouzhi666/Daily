@@ -48,4 +48,8 @@ export class CollectionComponent implements OnInit {
     debugger;
     window.open(event.data.href);
   }
+
+  deleteItem(){
+    debugger;
+  }
 }

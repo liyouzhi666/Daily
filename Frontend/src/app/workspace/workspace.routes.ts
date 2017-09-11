@@ -25,6 +25,11 @@ export const workspaceRoutes = [
         data: {preload: true}
       },
       {
+        path: 'template',
+        loadChildren: '../template/template.module#TemplateModule',
+        data: {preload: true}
+      },
+      {
         path: '**',
         component: PageNotFoundComponent
       },

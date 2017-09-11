@@ -4,7 +4,7 @@
   padding-right: 15px;
   margin-left: 165px;
   overflow-x: auto;
-  min-width: 1000px;
+  min-width: 700px;
   min-height: 500px;
   overflow: hidden;
 }
@@ -39,7 +39,7 @@
   top: 0;
   z-index: 900;
   width: 100%;
-  min-width: 1165px;
+  min-width: 765px; 
 }
 
 .header .header-li {

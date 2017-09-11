@@ -2,6 +2,13 @@
 <div [@pageAnimation]="'in'">
   <my-breadcrumb name1="日报管理" name2="我的收藏"></my-breadcrumb>
 </div>
+<label class="mr15">关键字</label>
+<input type="text" pInputText class="mr20" placeholder="请填写关键字"/>
+
+<button pButton type="button" class="ui-button-secondary" label="清空搜索"
+        (click)="industriesSearchNgModel=null;keywordNgModel=null"></button>
+<button pButton type="button" label="搜索"></button>
+<br/><br/>
 
 <p-dataTable [value]="items" selectionMode="single" [(selection)]="selectedItem" (onRowSelect)="onRowSelect($event)" [paginator]="true" rows="15" [responsive]="true" [tableStyle]="{'font-size':'16px'}">
     <p-header>
