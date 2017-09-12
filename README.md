@@ -2,6 +2,8 @@
 
 项目地址预览地址:
 
+[项目阿里云地址](http://139.196.87.132:8090)
+
 ## 项目简介
 
 项目大致分为前端、后端两大模块，前端模块使用angular4.x + primeng 开发；后端服务使用nodejs编写,爬虫使用python，数据库使用MySQL。
@@ -32,7 +34,14 @@
    在 Backend／backendServer 下执行: npm install
 
 5. 在 Frontend 下执行: ng serve ,如若操作无误浏览器打开 http://localhost:4200 ,将会显示部署的前端页面
+
 ## 效果图
+
+![列表](./previewImage/list.png)
+
+![模版](./previewImage/template.png)
+
+![编辑器](./previewImage/monaco.png)
 
 ## 关于
 

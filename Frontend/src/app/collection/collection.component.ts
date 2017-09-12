@@ -15,6 +15,7 @@ export class CollectionComponent implements OnInit {
   msgs = [];
   items: any;
   selectedItem: any;
+  keywordNgModel = '';
 
   constructor(private http: HttpService) { }
 
