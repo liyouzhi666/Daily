@@ -17,6 +17,13 @@ export class CollectionComponent implements OnInit {
   selectedItem: any;
   keywordNgModel = '';
 
+  display = false;
+  dialogHeader = '';
+  selectedItemName: any;
+  selectedItemHref: any;
+  selectedItemClass: any;
+  selectedItemTags: any;
+
   constructor(private http: HttpService) { }
 
   ngOnInit() {
@@ -50,7 +57,26 @@ export class CollectionComponent implements OnInit {
     window.open(event.data.href);
   }
 
-  deleteItem(){
+  editShow(collection: any) {
+    debugger;
+    this.dialogHeader = '编辑';
+    this.display = true;
+    this.selectedItemName = collection.name;
+    this.selectedItemHref = collection.href;
+    this.selectedItemClass = collection.class;
+    this.selectedItemTags = collection.tags;
+  }
+
+  deleteShow(collection: any) {
+    this.dialogHeader = '删除';
+    this.display = true;
+    this.selectedItemName = collection.name;
+    this.selectedItemHref = collection.href;
+    this.selectedItemClass = collection.class;
+    this.selectedItemTags = collection.tags;
+  }
+
+  confirm() {
     debugger;
   }
 }

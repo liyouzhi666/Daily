@@ -5,6 +5,7 @@ import {
     GrowlModule,
     DataTableModule,
     InputTextModule,
+    DialogModule,
     ButtonModule
 } from 'primeng/primeng';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -26,6 +27,7 @@ import {MyBreadcrumbModule} from "../components/my-breadcrumb/my-breadcrumb";
     DataTableModule,
     InputTextModule,
     ButtonModule,
+    DialogModule,
 
     MyBreadcrumbModule,
     RouterModule.forChild([

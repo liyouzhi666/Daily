@@ -22,4 +22,51 @@
     </p-column>
     <p-column field="class" header="分类" [sortable]="true" [style]="{'width':'150px'}"></p-column>
     <p-column field="tags" header="标签" [sortable]="true" [style]="{'width':'250px'}"></p-column>
+    <p-column styleClass="col-button" header="操作" [style]="{'width':'150px'}">
+      <ng-template let-col let-collection="rowData" pTemplate="body">
+        <div id="handle-button">
+          <button pButton type="button" label="编辑" (click)="editShow(collection)" class="ui-button-success"></button>
+          <button pButton type="button" label="删除" (click)="deleteShow(collection)" class="ui-button-danger"></button>
+        </div>
+      </ng-template>
+    </p-column>
 </p-dataTable>
+
+<p-dialog [header]="dialogHeader" [(visible)]="display" modal="modal" width="600" [responsive]="true" [positionTop]="'150'">
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-12">
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon" style="padding-top:7px;">文章名称</span>
+        <input type="text" pInputText [(ngModel)]="selectedItemName" placeholder="请输入名称">
+      </div>
+    </div>
+  </div>
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-12">
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon" style="padding-top:7px;">文章地址</span>
+        <input type="text" pInputText [(ngModel)]="selectedItemHref" placeholder="请输入名称">
+      </div>
+    </div>
+  </div>
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-12">
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon" style="padding-top:7px;">文章分类</span>
+        <input type="text" pInputText [(ngModel)]="selectedItemClass" placeholder="请输入分类">
+      </div>
+    </div>
+  </div>
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-12">
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon" style="padding-top:7px;">文章标签</span>
+        <input type="text" pInputText [(ngModel)]="selectedItemTags" placeholder="请输入标签">
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <button type="button" pButton icon="fa-check" (click)="confirm()" [label]="dialogHeader"></button>
+    <button type="button" pButton icon="fa-close" (click)="display=false" label="取消"></button>
+  </p-footer>
+</p-dialog>
