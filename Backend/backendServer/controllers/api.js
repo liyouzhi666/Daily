@@ -115,6 +115,83 @@ module.exports = {
         }
     },
 
+    'PUT /api/collect': async (ctx, next) => {
+        var Collection = sequelize.define('collection', {
+            name: Sequelize.TEXT,
+            href: Sequelize.TEXT,
+            class: Sequelize.STRING(255),
+            tags: Sequelize.TEXT,
+            updatedAt: Sequelize.STRING(30),
+            user: Sequelize.STRING(50)
+        },{
+            tableName: 'Collection',
+            timestamps: false
+        });
+        var now = String(Date.now());
+        try {
+            var myCollection = await Collection.findById(ctx.request.body.id);
+            var now = String(Date.now());
+            myCollection.name = new Buffer(ctx.request.body.name).toString('base64');
+            myCollection.href = new Buffer(ctx.request.body.href).toString('base64');
+            myCollection.class = ctx.request.body.class;
+            myCollection.tags = ctx.request.body.tags;
+            myCollection.updatedAt = now;
+            myCollection.user = ctx.request.body.user;
+            await myCollection.save();
+        } catch (err) {
+            ctx.response.set('Access-Control-Allow-Origin','*');
+            ctx.response.type = 'application/json';
+            ctx.response.body = {
+                info: 'edit failed!',
+                error: err
+            };
+            return;
+        }
+        ctx.response.set('Access-Control-Allow-Origin','*');
+        ctx.response.type = 'application/json';
+        ctx.response.body = {
+            info: 'edit successed!',
+            error: ''
+        };
+    },
+
+    'DELETE /api/collect': async (ctx, next) => {
+        const querystring = require('querystring');
+        if (ctx.request.querystring) {
+            var myID = querystring.parse(ctx.request.querystring).id;
+        }
+        var Collection = sequelize.define('collection', {
+            name: Sequelize.TEXT,
+            href: Sequelize.TEXT,
+            class: Sequelize.STRING(255),
+            tags: Sequelize.TEXT,
+            updatedAt: Sequelize.STRING(30),
+            user: Sequelize.STRING(50)
+        },{
+            tableName: 'Collection',
+            timestamps: false
+        });
+        var now = String(Date.now());
+        try {
+            var myCollection = await Collection.findById(myID);
+            await myCollection.destroy();
+        } catch (err) {
+            ctx.response.set('Access-Control-Allow-Origin','*');
+            ctx.response.type = 'application/json';
+            ctx.response.body = {
+                info: 'delete failed!',
+                error: err
+            };
+            return;
+        }
+        ctx.response.set('Access-Control-Allow-Origin','*');
+        ctx.response.type = 'application/json';
+        ctx.response.body = {
+            info: 'delete successed!',
+            error: ''
+        };
+    },
+
     'POST /api/collect': async (ctx, next) => {
         var Collection = sequelize.define('collection', {
             name: Sequelize.TEXT,

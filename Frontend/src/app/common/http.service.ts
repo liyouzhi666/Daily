@@ -55,7 +55,7 @@ export class HttpService {
 
     put(url: string, jsonBody: any): Promise<any> {
         //let headers = new Headers({'Content-Type': 'application/json'});
-        let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded','HuaweiCloud':'Huawei'});
+        let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
 
         let options = new RequestOptions({ headers: headers,withCredentials:false });
         return this.http.put(url, jsonBody, options)

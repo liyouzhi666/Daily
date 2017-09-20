@@ -4,7 +4,11 @@ const bodyParser = require('koa-bodyparser');
 
 const controller = require('./controller');
 
+const cors = require('koa-cors');
+
 const app = new Koa();
+
+app.use(cors());
 
 // log request URL:
 app.use(async (ctx, next) => {

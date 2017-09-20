@@ -127,6 +127,7 @@ export class WorkspaceComponent implements OnInit {
           this.realname = this.userName;
           sessionStorage.setItem('userToken', window.btoa(`${this.userName}:${this.password}`));
           sessionStorage.setItem('realname', this.userName);
+          window.location.reload();
         } else{
           this.msgs.push({severity:'warn', summary:'登陆失败', detail:`${success.error}`});
         }
