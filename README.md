@@ -43,6 +43,102 @@
 
 ![编辑器](./previewImage/monaco.png)
 
+## FileTree 目录结构
+```shell
+├── README.md
+├── e2e
+│   ├── app.e2e-spec.ts
+│   ├── app.po.ts
+│   └── tsconfig.e2e.json
+├── karma.conf.js
+├── package.json
+├── protractor.conf.js
+├── src
+│   ├── app
+│   │   ├── app.component.css
+│   │   ├── app.component.html
+│   │   ├── app.component.ts
+│   │   ├── app.module.ts
+│   │   ├── app.routes.ts
+│   │   ├── collection
+│   │   │   ├── collection.component.css
+│   │   │   ├── collection.component.html
+│   │   │   ├── collection.component.ts
+│   │   │   └── collection.module.ts
+│   │   ├── common
+│   │   │   ├── http.service.ts
+│   │   │   └── public-data.ts
+│   │   ├── components
+│   │   │   ├── my-breadcrumb
+│   │   │   ├── my-carousel
+│   │   │   ├── my-gotop
+│   │   │   ├── my-information
+│   │   │   ├── my-loading
+│   │   │   ├── my-switch
+│   │   │   └── my-tag
+│   │   ├── data-table
+│   │   │   ├── data-table.component.css
+│   │   │   ├── data-table.component.html
+│   │   │   ├── data-table.component.ts
+│   │   │   └── data-table.module.ts
+│   │   ├── editor
+│   │   │   ├── editor.component.css
+│   │   │   ├── editor.component.html
+│   │   │   ├── editor.component.ts
+│   │   │   └── editor.module.ts
+│   │   ├── not-found.component.ts
+│   │   ├── preloading.ts
+│   │   ├── template
+│   │   │   ├── template.component.css
+│   │   │   ├── template.component.html
+│   │   │   ├── template.component.ts
+│   │   │   └── template.module.ts
+│   │   └── workspace
+│   │       ├── workspace.component.css
+│   │       ├── workspace.component.html
+│   │       ├── workspace.component.ts
+│   │       ├── workspace.module.ts
+│   │       ├── workspace.routes.ts
+│   │       └── workspace.service.ts
+│   ├── assets
+│   │   ├── css
+│   │   │   ├── font-awesome.css
+│   │   │   ├── font-awesome.css.map
+│   │   │   └── font-awesome.min.css
+│   │   ├── data
+│   │   │   └── user-menu.json
+│   │   ├── fonts
+│   │   │   ├── FontAwesome.otf
+│   │   │   ├── fontawesome-webfont.eot
+│   │   │   ├── fontawesome-webfont.svg
+│   │   │   ├── fontawesome-webfont.ttf
+│   │   │   ├── fontawesome-webfont.woff
+│   │   │   └── fontawesome-webfont.woff2
+│   │   ├── image
+│   │   │   ├── baozou.png
+│   │   │   ├── sport.jpg
+│   │   │   ├── timg.jpeg
+│   │   │   └── wow.jpg
+│   │   └── monaco
+│   │       └── vs -> ../../../node_modules/monaco-editor/min/vs
+│   ├── environments
+│   │   ├── environment.prod.ts
+│   │   └── environment.ts
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── main.ts
+│   ├── polyfills.ts
+│   ├── styles.css
+│   ├── test.ts
+│   ├── theme-element.css
+│   ├── tsconfig.app.json
+│   ├── tsconfig.spec.json
+│   └── typings.d.ts
+├── tsconfig.json
+└── tslint.json
+
+```
+
 ## 关于
 
 示例界面的码农日报内容由 https://github.com/kujian/frontendDaily 处爬取
